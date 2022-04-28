@@ -31,8 +31,8 @@
         <main>
             <header>
                 <div class="logo">
-                    <a href="index.php"><img title="Jadoo, un voyage culinaire gourmet et gourmand" src="./../img/logo_jadoo_1.svg" alt="Logo jadoo" height="50px"></a><!--
-                    --><a href="index.php"><img title="Jadoo, un voyage culinaire gourmet et gourmand" src="./../img/logo_jadoo_2.svg" alt="Jadoo" height="35px"></a>
+                    <a href="./../index.php"><img title="Jadoo, un voyage culinaire gourmet et gourmand" src="./../img/logo_jadoo_1.svg" alt="Logo jadoo" height="50px"></a><!--
+                    --><a href="./../index.php"><img title="Jadoo, un voyage culinaire gourmet et gourmand" src="./../img/logo_jadoo_2.svg" alt="Jadoo" height="35px"></a>
                 </div>
                 <?php
                     if ($_SESSION['logged'] == 'oui') {
@@ -387,8 +387,8 @@
                 <div class="conteneur-elements">
                     <section id="footer-logo" class="footer-part">
                         <div class="logo complet">
-                        <a href="index.php"><img title="Jadoo, un voyage culinaire gourmet et gourmand" src="./../img/logo_jadoo_1.svg" alt="Logo jadoo" height="50px"></a><!--
-                    --><a href="index.php"><img title="Jadoo, un voyage culinaire gourmet et gourmand" src="./../img/logo_jadoo_2.svg" alt="Jadoo" height="35px"></a>
+                        <a href="./../index.php"><img title="Jadoo, un voyage culinaire gourmet et gourmand" src="./../img/logo_jadoo_1.svg" alt="Logo jadoo" height="50px"></a><!--
+                    --><a href="./../index.php"><img title="Jadoo, un voyage culinaire gourmet et gourmand" src="./../img/logo_jadoo_2.svg" alt="Jadoo" height="35px"></a>
                         </div>
                         <p class="texte-couleur-gris-bleu">Un voyage gastronomique entre<br>le Japon et la France</p>
                     </section><!--
