@@ -1,0 +1,530 @@
+.texte-couleur-gris-bleu {
+    color: #5e6282;
+}
+
+.bouton.bleu {
+    background-color: #007aff;
+    box-shadow: 0px 20px 35px 5px rgba(11, 54, 59, 0.15);
+}
+
+.bouton:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+.bouton {
+    font: 18px Arial, Helvetica, sans-serif;
+    border-radius: 10px;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+    color: white;
+}
+
+.bouton > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.texte-poppins-bold {
+    font-family: "poppins-bold";
+}
+
+.texte-volkhov-bold {
+    font-family: "volkhov-bold";
+}
+
+.rouge{
+
+    color: red;
+
+}
+
+.bouton.suppression{
+
+    background-color: #ff0000;
+    box-shadow: 0px 20px 35px 5px rgba(11, 54, 59, 0.15);
+
+}
+
+.bouton-user{
+
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+
+}
+
+#modification-info-user{
+
+    display: none;
+
+}
+
+/* Remplacement des comportements d'origine */
+header nav ul .menu-bouton a,
+#footer-plan a {
+    text-decoration: none;
+    color: inherit;
+}
+
+header nav ul .menu-bouton a:hover,
+#footer-plan a:hover{
+    text-decoration: underline;
+}
+
+
+/* Logo jadoo */
+.logo {
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.logo img {
+    max-height: 100%;
+}
+
+.logo img:first-child {
+    margin-right: 20px;
+}
+
+.logo:hover img:first-child {
+    animation: logo-animation 0.5s ease-in;
+    margin-right: 20px;
+}
+
+@keyframes logo-animation {
+    20% {
+        transform: rotate(15deg);
+    }
+
+    40% {
+        transform: rotate(-10deg);
+    }
+
+    60% {
+        transform: rotate(5deg);
+    }
+
+    80% {
+        transform: rotate(-5deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+
+/* CSS en-tête */
+header {
+    display: flex;
+    background-color: #fff;
+    width: 100%;
+    height: 70px;
+    position: sticky;
+    z-index: 5;
+    top: 0;
+    padding: 20px 0;
+    transition: all 0.2s ease-in-out;
+}
+
+header nav {
+    height: 100%;
+    margin-right: 8%;
+    transition: all 0.2s ease-in-out;
+}
+
+header nav ul {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    height: 100%;
+    list-style-type: none;
+}
+
+header .logo {
+    margin-left: 8%;
+    margin-right: auto;
+    transition: all 0.2s ease-in-out;
+}
+
+header nav ul li a {
+    color: #212832;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+}
+
+header nav ul li:not(:last-child) {
+    margin-right: 30px;
+}
+
+header .burger {
+    display: none;
+}
+
+
+/* CSS pied de page */
+
+footer {
+    background-color: #f3f3f3;
+    padding: 70px 8% 20px;
+}
+
+footer > p {
+    font-size: 14px;
+}
+
+footer section {
+    padding: 0;
+}
+
+footer .copyright {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+footer .footer-part {
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px 0 20px;
+}
+
+footer p {
+    font-size: 18px;
+    line-height: 147.5%;
+}
+
+#footer-logo .logo {
+    display: block;
+    height: auto;
+}
+
+#footer-logo .logo img {
+    height: 50px;
+}
+
+#footer-plan div {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#footer-plan p {
+    margin: 0;
+}
+
+#footer-plan p:not(:last-child) {
+    margin: 0 0 10px;
+}
+
+#footer-plan .plan-title:not(:last-child) {
+    margin: 0 0 20px;
+}
+
+#footer-plan .plan-title {
+    font-size: 21px;
+}
+
+#footer-plan div:not(:last-child) {
+    margin: 0 50px 0 0;
+}
+
+#footer-uberEats .logo-ubereat {
+    height: 30px;
+}
+
+#footer-uberEats p {
+    margin: 10px 0 30px;
+}
+
+#footer-uberEats .app-download-button {
+    background-color: #000;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 10px;
+}
+
+#footer-uberEats .app-download-button img {
+    margin: 0 10px 0 0;
+}
+
+#footer-uberEats .app-download-button * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+/* Utilisé pour l'effet parallax */
+
+main {
+    height: 100vh;
+    perspective: 2px;
+    overflow-x: hidden;
+}
+
+section {
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    padding: 50px 8% 50px 8%;
+    overflow: hidden;
+}
+
+section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: -4px;
+    /* Utilisé pour l'effet parallax */
+    transform: translateZ(-1px) scale(1.5);
+    z-index: -1;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Conteneur des élements */
+.conteneur-elements {
+
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+
+}
+
+
+/* CSS spécifique à la section 5 */
+
+#section-5 {
+    text-align: center;
+    background-color: #f8f8f8;
+}
+
+#section-5 h3 {
+    font-size: 28px;
+    margin-bottom: 50px;
+}
+
+#section-5 article{
+
+    width: 50%;
+    padding: 0px 50px 0px 50px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.deux-champs-inline{
+
+    display: flex;
+
+}
+
+.titre, .valeur{
+
+    width: 50%;
+
+}
+
+.deux-champs-inline .contact-champ {
+    display: flex;
+    width: 48%;
+}
+
+.deux-champs-inline .contact-champ:not(:last-child) {
+    margin-right: 50px;
+}
+
+.contact-champ {
+    margin: 0 0 30px;
+    text-align: left;
+}
+
+.contact-champ label{
+    display: block;
+    font-size: 18px;
+}
+
+.deux-champs-inline .contact-champ label:not(:last-child) {
+
+    margin-bottom: 10px;
+    font-weight: bold;
+    width: 40%;
+    margin-right: 15px;
+
+}
+
+
+.formulaire-deux-champs-inline .formulaire-contact-champ {
+    display: inline-block;
+    width: 48%;
+}
+
+.formulaire-deux-champs-inline .formulaire-contact-champ:not(:last-child) {
+    padding: 0 15px 0 0;
+}
+
+.formulaire-contact-champ {
+    margin: 0 0 30px;
+}
+
+.formulaire-contact-champ label,
+.formulaire-contact-champ input {
+    display: block;
+    font-size: 15px;
+}
+
+.formulaire-contact-champ input {
+    margin: 0;
+    padding: 0 0 5px;
+    background-color: #f8f8f8;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #c9c9c9;
+    outline: 0;
+    font-size: 13px;
+    transition: transform 0.2s;
+    color: #535353;
+}
+
+.formulaire-contact-champ:hover input {
+    transform: scale(1.02);
+}
+
+.formulaire-contact-champ input:focus {
+    margin: 0 0 -5px;
+    padding: 0 0 10px;
+    border-bottom-color: #007aff;
+    transform: scale(1);
+}
+
+.formulaire-contact-champ label {
+    margin: 0 0 12px;
+}
+
+
+
+
+@media (max-width: 1024px) {
+    html,
+    body {
+        font-size: 14px;
+    }
+
+    header nav ul li {
+        display: none;
+    }
+
+    header .logo {
+        margin-left: 5%;
+    }
+
+    header nav {
+        margin-right: 5%;
+    }
+
+    header .burger {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .conteneur-form-login{
+
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 30px;
+    
+    }
+
+    .form-connexion{
+
+        flex-direction: column;
+        width: 50%;
+        align-items: center;
+
+    }
+
+    .form-connexion input{
+
+        margin-right: 0px;
+    
+    }
+
+    footer,
+    section {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    footer .footer-part,
+    footer .footer-part * {
+        text-align: center;
+    }
+
+    footer #footer-plan.footer-part * {
+        text-align: left;
+    }
+
+}
+
+
+
+/* Mobile */
+
+@media (max-width: 656px) {
+
+    footer,
+    section{
+        padding-top: 8%;
+        padding-bottom: 8%;
+    }
+
+    section article {
+        width: 100%;
+        text-align: center;
+        max-width: initial;
+    }
+
+    footer .footer-part{
+
+        margin-bottom: 20px;
+
+    }
+
+}
+
+
+@media (max-width: 360px) {
+
+    #footer-plan{
+
+       flex-direction: column;
+
+    }
+
+    #footer-plan p{
+
+        font-size: 14px;
+
+    }
+
+    #footer-plan div:not(:last-child){
+
+        margin-right: 20px;
+
+    }
+
+}

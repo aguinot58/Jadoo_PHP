@@ -24,6 +24,10 @@
             $servername = $configs['servername'];
             $username = $configs['username'];
             $password = $configs['password'];
+
+            $tb_dte = explode("/", date("Y/m/d"));
+            $dte_message = $tb_dte[2].'/'.$tb_dte[1].'/'.$tb_dte[0];
+
             //On établit la connexion
             $conn = new PDO("mysql:host=$servername;dbname=jadoo;charset=UTF8", $username, $password);
             //On définit le mode d'erreur de PDO sur Exception
@@ -33,12 +37,13 @@
                 
                 //On insère les données reçues
                 $sth = $conn->prepare("
-                        INSERT INTO messages(Nom, Prenom, Email, Message)
-                        VALUES(:nom, :prenom, :email, :message)");
+                        INSERT INTO messages(Nom, Prenom, Email, Message, Dte_message)
+                        VALUES(:nom, :prenom, :email, :message :date_message)");
                 $sth->bindParam(':nom', $nom);    
                 $sth->bindParam(':prenom', $prenom);
                 $sth->bindParam(':email', $email);
                 $sth->bindParam(':message', $message);
+                $sth->bindParam(':date_message', $dte_message);
                 $sth->execute();
                     
                 /*Fermeture de la connexion à la base de données*/
@@ -57,8 +62,8 @@
                 setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
                 $format1 = '%A %d %B %Y %H:%M:%S';
                 $date1 = strftime($format1);
-                $fichier = fopen('error_log_formulaire.txt', 'c+b');
-                fseek($fichier, filesize('error_log_formulaire.txt'));
+                $fichier = fopen('./../log/error_log_formulaire.txt', 'c+b');
+                fseek($fichier, filesize('./../log/error_log_formulaire.txt'));
                 fwrite($fichier, "\n\n" .$date1. " - Impossible d'injecter les données. Erreur : " .$e);
                 fclose($fichier);
                 echo 'Une erreur est survenue, merci de réessayer ultérieurement.';
@@ -76,8 +81,8 @@
             setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
             $format1 = '%A %d %B %Y %H:%M:%S';
             $date1 = strftime($format1);
-            $fichier = fopen('error_log_formulaire.txt', 'c+b');
-            fseek($fichier, filesize('error_log_formulaire.txt'));
+            $fichier = fopen('./../log/error_log_formulaire.txt', 'c+b');
+            fseek($fichier, filesize('./../log/error_log_formulaire.txt'));
             fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données. Erreur : " .$e);
             fclose($fichier);
             echo 'Une erreur est survenue, merci de réessayer ultérieurement.';

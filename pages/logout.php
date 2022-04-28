@@ -13,6 +13,14 @@
         unset($_SESSION['logged']);
     }
 
+    if (isset($_SESSION['admin'])){
+        unset($_SESSION['admin']);
+    }
+
+    if (isset($_SESSION['user'])){
+        unset($_SESSION['user']);
+    }
+
     session_destroy();
 
     header("Location:../index.php");

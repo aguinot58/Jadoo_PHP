@@ -1,9 +1,16 @@
 /* fichier javascript en mode strict */
 "use strict"; 
 
-function valider(){
+function modif_user(){
 
-    /* validation formulaire index.php */
+    document.getElementById('modification-info-user').style.display = "block";
+    document.getElementById('affichage-info-user').style.display = "none";
+
+}
+
+function valider_modification(){
+
+    //validation modification profile.php
     let masqueIdentifiant = /^[A-Z]{1}[A-Za-z0-9]{6,39}$/;
     let masqueMdp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$/;
     let masqueNPV = /^[A-Za-zàâäéèêëïîôöùûüÿç '-]{2,50}$/;
@@ -21,7 +28,10 @@ function valider(){
     let villeValide = document.getElementById('ville').value.match(masqueNPV);
     let codePostalValide = document.getElementById('code_postal').value.match(masqueCP);
     let dteNaissanceValide = document.getElementById('dte_naissance').value.match(masqueDteNaissance);
-    let mdpValide = document.getElementById('mdp').value.match(masqueMdp);
+
+    if (document.getElementById('mdp').value != ""){
+        let mdpValide = document.getElementById('mdp').value.match(masqueMdp);
+    }
 
     if (document.getElementById('adresse_2').value != ""){
         let cptAdresseValide = document.getElementById('adresse_2').value.match(masqueAdresse);
@@ -95,7 +105,7 @@ function valider(){
         return false;
     }
 
-    if (mdpValide == null) {
+    if (document.getElementById('mdp').value != "" && mdpValide == null) {
         alert("Votre mot de passe doit contenir au moins 1 majuscule, 1 chiffre, 1 caractère spécial et doit faire entre 7 et 20 caractères");
         return false;
     }
@@ -106,6 +116,16 @@ function valider(){
     }
 
     return true;
+
+}
+
+function suppr_user(){
+
+    if (confirm("Attention, la suppression est définitive. Etes-vous certain de vouloir supprimer votre profile ?") == true){
+
+        window.location.assign("./../pages/suppr_user.php");
+
+    }
 
 }
 

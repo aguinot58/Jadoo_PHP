@@ -21,6 +21,14 @@
     </head>
 
     <body>
+        <?php
+            if(isset($_COOKIE["Suppression"])) {
+
+                echo '<script>alert("Profile supprimé avec succès. Vous avez été déconnecté.");</script>';
+                setcookie("Suppression", 1, -3600, "/");
+
+            }
+        ?>
         <main>
             <header>
                 <div class="logo">
@@ -37,11 +45,11 @@
                                         <li class="menu-bouton"><a href="#section-4">Commander</a></li>
                                         <li class="menu-bouton"><a href="#section-5">Contactez-nous</a></li>';
                         if ($_SESSION['admin'] == 'oui') {
-                            echo '<li class="menu-bouton"><a href="./pages/user.php">Profile</a></li>';
+                            echo '<li class="menu-bouton"><a href="./pages/profile.php">Profile</a></li>';
                             echo '<li class="menu-bouton"><a href="./pages/back_office.php">Administration</a></li>';
                             echo '<li class="menu-bouton"><a href="./pages/logout.php" id="deconnexion">Déconnexion</a></li>';
                         } else {
-                            echo '<li class="menu-bouton"><a href="./pages/user.php">Profile</a></li>';
+                            echo '<li class="menu-bouton"><a href="./pages/profile.php">Profile</a></li>';
                             echo '<li class="menu-bouton"><a href="./pages/logout.php" id="deconnexion">Déconnexion</a></li>';
                         }
                         echo                '<li class="menu-bouton burger">
@@ -186,8 +194,8 @@
                                     setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
                                     $format1 = '%A %d %B %Y %H:%M:%S';
                                     $date1 = strftime($format1);
-                                    $fichier = fopen('error_log_index.txt', 'c+b');
-                                    fseek($fichier, filesize('error_log_index.txt'));
+                                    $fichier = fopen('./../log/error_log_index.txt', 'c+b');
+                                    fseek($fichier, filesize('./../log/error_log_index.txt'));
                                     fwrite($fichier, "\n\n" .$date1. " - Erreur import plats chauds. Erreur : " .$e);
                                     fclose($fichier);
 
@@ -206,8 +214,8 @@
                             setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
                             $format1 = '%A %d %B %Y %H:%M:%S';
                             $date1 = strftime($format1);
-                            $fichier = fopen('error_log_index.txt', 'c+b');
-                            fseek($fichier, filesize('error_log_index.txt'));
+                            $fichier = fopen('./../log/error_log_index.txt', 'c+b');
+                            fseek($fichier, filesize('./../log/error_log_index.txt'));
                             fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données. Erreur : " .$e);
                             fclose($fichier);
 
@@ -327,8 +335,8 @@
                                     setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
                                     $format1 = '%A %d %B %Y %H:%M:%S';
                                     $date1 = strftime($format1);
-                                    $fichier = fopen('error_log_index.txt', 'c+b');
-                                    fseek($fichier, filesize('error_log_index.txt'));
+                                    $fichier = fopen('./../log/error_log_index.txt', 'c+b');
+                                    fseek($fichier, filesize('./../log/error_log_index.txt'));
                                     fwrite($fichier, "\n\n" .$date1. " - Erreur import makis. Erreur : " .$e);
                                     fclose($fichier);
                                     
@@ -343,8 +351,8 @@
                             setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
                             $format1 = '%A %d %B %Y %H:%M:%S';
                             $date1 = strftime($format1);
-                            $fichier = fopen('error_log_index.txt', 'c+b');
-                            fseek($fichier, filesize('error_log_index.txt'));
+                            $fichier = fopen('./../log/error_log_index.txt', 'c+b');
+                            fseek($fichier, filesize('./../log/error_log_index.txt'));
                             fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données. Erreur : " .$e);
                             fclose($fichier);
 

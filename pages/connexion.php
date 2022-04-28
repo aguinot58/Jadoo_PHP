@@ -7,6 +7,7 @@
     if (!isset($_SESSION['mdp'])){
         $_SESSION['mdp'] = 'vide';
     }
+    
 ?>
 
 <!DOCTYPE html>
@@ -31,10 +32,10 @@
                 </div>
                 <nav>
                     <ul>
-                        <li class="menu-bouton"><a href="#section-2">Les nouveautés</a></li>
-                        <li class="menu-bouton"><a href="#section-3">Découvrir</a></li>
-                        <li class="menu-bouton"><a href="#section-4">Commander</a></li>
-                        <li class="menu-bouton"><a href="#section-5">Contactez-nous</a></li>
+                        <li class="menu-bouton"><a href="./../index.php#section-2">Les nouveautés</a></li>
+                        <li class="menu-bouton"><a href="./../index.php#section-3">Découvrir</a></li>
+                        <li class="menu-bouton"><a href="./../index.php#section-4">Commander</a></li>
+                        <li class="menu-bouton"><a href="./../index.php#section-5">Contactez-nous</a></li>
                         <li class="menu-bouton connexion"><a href="connexion.php">Connexion</a></li>
                         <li class="menu-bouton burger">
                             <img title="Menu" src="./../img/img/burger_icon.svg" alt="Icone menu">
@@ -67,15 +68,15 @@
                         <p class="texte-couleur-gris-bleu">Un voyage gastronomique entre<br>le Japon et la France</p>
                     </section><!--
                     --><section id="footer-plan" class="footer-part">
-                        <div class="plan-restaurant">
+                    <div class="plan-restaurant">
                             <p class="texte-poppins-bold plan-title">Restaurant</p>
-                            <p class="texte-couleur-gris-bleu"><a href="#section-2">Nouveautés</a></p>
-                            <p class="texte-couleur-gris-bleu"><a href="#section-3">Découvrir</a></p>
-                            <p class="texte-couleur-gris-bleu"><a href="#section-4">Commander</a></p>
+                            <p class="texte-couleur-gris-bleu"><a href="./../index.php#section-2">Nouveautés</a></p>
+                            <p class="texte-couleur-gris-bleu"><a href="./../index.php#section-3">Découvrir</a></p>
+                            <p class="texte-couleur-gris-bleu"><a href="./../index.php#section-4">Commander</a></p>
                         </div>
                         <div class="plan-contact">
                             <p class="texte-poppins-bold plan-title">Contact</p>
-                            <p class="texte-couleur-gris-bleu"><a href="#section-5">Prendre RDV</a></p>
+                            <p class="texte-couleur-gris-bleu"><a href="./../index.php#section-5">Prendre RDV</a></p>
                         </div>
                     </section><!--
                     --><section id="footer-uberEats" class="footer-part">

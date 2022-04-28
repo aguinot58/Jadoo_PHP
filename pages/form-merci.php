@@ -32,16 +32,16 @@
     
                         echo '<nav>
                                     <ul>
-                                        <li class="menu-bouton"><a href="#section-2">Les nouveautés</a></li>
-                                        <li class="menu-bouton"><a href="#section-3">Découvrir</a></li>
-                                        <li class="menu-bouton"><a href="#section-4">Commander</a></li>
-                                        <li class="menu-bouton"><a href="#section-5">Contactez-nous</a></li>';
+                                        <li class="menu-bouton"><a href="./../index.php#section-2">Les nouveautés</a></li>
+                                        <li class="menu-bouton"><a href="./../index.php#section-3">Découvrir</a></li>
+                                        <li class="menu-bouton"><a href="./../index.php#section-4">Commander</a></li>
+                                        <li class="menu-bouton"><a href="./../index.php#section-5">Contactez-nous</a></li>';
                         if ($_SESSION['admin'] == 'oui') {
-                            echo '<li class="menu-bouton"><a href="user.php">Profile</a></li>';
+                            echo '<li class="menu-bouton"><a href="profile.php">Profile</a></li>';
                             echo '<li class="menu-bouton"><a href="back_office.php">Administration</a></li>';
                             echo '<li class="menu-bouton"><a href="logout.php" id="deconnexion">Déconnexion</a></li>';
                         } else {
-                            echo '<li class="menu-bouton"><a href="user.php">Profile</a></li>';
+                            echo '<li class="menu-bouton"><a href="profile.php">Profile</a></li>';
                             echo '<li class="menu-bouton"><a href="logout.php" id="deconnexion">Déconnexion</a></li>';
                         }
                         echo                '<li class="menu-bouton burger">
@@ -53,10 +53,10 @@
                     } else {
                         echo '<nav>
                                     <ul>
-                                        <li class="menu-bouton"><a href="#section-2">Les nouveautés</a></li>
-                                        <li class="menu-bouton"><a href="#section-3">Découvrir</a></li>
-                                        <li class="menu-bouton"><a href="#section-4">Commander</a></li>
-                                        <li class="menu-bouton"><a href="#section-5">Contactez-nous</a></li>
+                                        <li class="menu-bouton"><a href="./../index.php#section-2">Les nouveautés</a></li>
+                                        <li class="menu-bouton"><a href="./../index.php#section-3">Découvrir</a></li>
+                                        <li class="menu-bouton"><a href="./../index.php#section-4">Commander</a></li>
+                                        <li class="menu-bouton"><a href="./../index.php#section-5">Contactez-nous</a></li>
                                         <li class="menu-bouton"><a href="inscription.php">Inscription</a></li>
                                         <li class="menu-bouton"><a href="connexion.php">Connexion</a></li>
                                         <li class="menu-bouton burger">

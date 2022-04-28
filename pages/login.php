@@ -25,6 +25,7 @@
 
         $_SESSION['Identifiant'] = 'renseigne';
         $_SESSION['mdp'] = 'renseigne';
+        $_SESSION['user']= $identifiant;
         
         try{
 
@@ -94,8 +95,8 @@
                 setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
                 $format1 = '%A %d %B %Y %H:%M:%S';
                 $date1 = strftime($format1);
-                $fichier = fopen('error_log_login.txt', 'c+b');
-                fseek($fichier, filesize('error_log_login.txt'));
+                $fichier = fopen('./../log/error_log_login.txt', 'c+b');
+                fseek($fichier, filesize('./../log/error_log_login.txt'));
                 fwrite($fichier, "\n\n" .$date1. " - Echec extraction mdp login. Erreur : " .$e);
                 fclose($fichier);
                 echo 'Une erreur est survenue, merci de réessayer ultérieurement.';
@@ -114,8 +115,8 @@
             setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
             $format1 = '%A %d %B %Y %H:%M:%S';
             $date1 = strftime($format1);
-            $fichier = fopen('error_log_connexion.txt', 'c+b');
-            fseek($fichier, filesize('error_log_connexion.txt'));
+            $fichier = fopen('./../log/error_log_connexion.txt', 'c+b');
+            fseek($fichier, filesize('./../log/error_log_connexion.txt'));
             fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données. Erreur : " .$e);
             fclose($fichier);
             echo 'Une erreur est survenue, merci de réessayer ultérieurement.';
