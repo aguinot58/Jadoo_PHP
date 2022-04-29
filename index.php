@@ -5,6 +5,14 @@
         $_SESSION['logged'] = 'non';
     }
 
+    $curPageName = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
+
+    if ($curPageName == "index.php") {
+        $lien = "./";
+    } else {
+        $lien = "./../";
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +20,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="./css/fonts.css">
+        <link rel="stylesheet" href="./css/header_footer.css">
         <link rel="stylesheet" href="./css/style.css">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,56 +34,15 @@
             if(isset($_COOKIE["Suppression"])) {
 
                 echo '<script>alert("Profile supprimé avec succès. Vous avez été déconnecté.");</script>';
-                setcookie("Suppression", 1, -3600, "/");
+                setcookie("Suppression", "", time() -3600, "/");
 
             }
         ?>
         <main>
-            <header>
-                <div class="logo">
-                    <a href="index.php"><img title="Jadoo, un voyage culinaire gourmet et gourmand" src="./img/logo_jadoo_1.svg" alt="Logo jadoo" height="50px"></a><!--
-                    --><a href="index.php"><img title="Jadoo, un voyage culinaire gourmet et gourmand" src="./img/logo_jadoo_2.svg" alt="Jadoo" height="35px"></a>
-                </div>
-                <?php
-                    if ($_SESSION['logged'] == 'oui') {
-    
-                        echo '<nav>
-                                    <ul>
-                                        <li class="menu-bouton"><a href="#section-2">Les nouveautés</a></li>
-                                        <li class="menu-bouton"><a href="#section-3">Découvrir</a></li>
-                                        <li class="menu-bouton"><a href="#section-4">Commander</a></li>
-                                        <li class="menu-bouton"><a href="#section-5">Contactez-nous</a></li>';
-                        if ($_SESSION['admin'] == 'oui') {
-                            echo '<li class="menu-bouton"><a href="./pages/profil.php">Mon Compte</a></li>';
-                            echo '<li class="menu-bouton"><a href="./pages/back_office.php">Administration</a></li>';
-                            echo '<li class="menu-bouton"><a href="./pages/logout.php" id="deconnexion">Déconnexion</a></li>';
-                        } else {
-                            echo '<li class="menu-bouton"><a href="./pages/profil.php">Mon Compte</a></li>';
-                            echo '<li class="menu-bouton"><a href="./pages/logout.php" id="deconnexion">Déconnexion</a></li>';
-                        }
-                        echo                '<li class="menu-bouton burger">
-                                            <img title="Menu" src="./img/burger_icon.svg" alt="Icone menu">
-                                        </li>
-                                    </ul>
-                                </nav>';            
-
-                    } else {
-                        echo '<nav>
-                                    <ul>
-                                        <li class="menu-bouton"><a href="#section-2">Les nouveautés</a></li>
-                                        <li class="menu-bouton"><a href="#section-3">Découvrir</a></li>
-                                        <li class="menu-bouton"><a href="#section-4">Commander</a></li>
-                                        <li class="menu-bouton"><a href="#section-5">Contactez-nous</a></li>
-                                        <li class="menu-bouton"><a href="./pages/inscription.php">Inscription</a></li>
-                                        <li class="menu-bouton"><a href="./pages/connexion.php">Connexion</a></li>
-                                        <li class="menu-bouton burger">
-                                            <img title="Menu" src="./img/burger_icon.svg" alt="Icone menu">
-                                        </li>
-                                    </ul>
-                                </nav>';
-                    }
-                ?>
-            </header>
+            <?php
+                /* importation header */
+                include $lien.'pages/header.php'
+            ?>
             <section id="section-1">
                 <noscript>
                     <article class="sans-script">Le javascript est désactivé !<br>Vous risquez de rencontrer des dysfonctionnements sur le site.<br><br>
@@ -468,42 +436,10 @@
                     --><div class="form-droite"></div>
                 </div>
             </section>
-            <footer>
-                <div class="conteneur-elements">
-                    <section id="footer-logo" class="footer-part">
-                        <div class="logo complet">
-                        <a href="index.php"><img title="Jadoo, un voyage culinaire gourmet et gourmand" src="./img/logo_jadoo_1.svg" alt="Logo jadoo" height="50px"></a><!--
-                    --><a href="index.php"><img title="Jadoo, un voyage culinaire gourmet et gourmand" src="./img/logo_jadoo_2.svg" alt="Jadoo" height="35px"></a>
-                        </div>
-                        <p class="texte-couleur-gris-bleu">Un voyage gastronomique entre<br>le Japon et la France</p>
-                    </section><!--
-                    --><section id="footer-plan" class="footer-part">
-                        <div class="plan-restaurant">
-                            <p class="texte-poppins-bold plan-title">Restaurant</p>
-                            <p class="texte-couleur-gris-bleu"><a href="#section-2">Nouveautés</a></p>
-                            <p class="texte-couleur-gris-bleu"><a href="#section-3">Découvrir</a></p>
-                            <p class="texte-couleur-gris-bleu"><a href="#section-4">Commander</a></p>
-                        </div>
-                        <div class="plan-contact">
-                            <p class="texte-poppins-bold plan-title">Contact</p>
-                            <p class="texte-couleur-gris-bleu"><a href="#section-5">Prendre RDV</a></p>
-                        </div>
-                    </section><!--
-                    --><section id="footer-uberEats" class="footer-part">
-                        <img class="logo-ubereat" title="UberEats" src="./img/logo_uberEats_2.svg" alt="Logo UberEats">
-                        <p class="texte-couleur-gris-bleu">Téléchargez UberEats</p>
-                        <button class="app-download-button bouton">
-                            <img src="./img/logo_google_play.svg" alt="Logo Google Play"><!--
-                            --><span>GOOGLE PLAY</span>
-                        </button>
-                        <button class="app-download-button bouton">
-                            <img src="./img/logo_apple.svg" alt="Logo Apple"><!--
-                            --><span>APPLE STORE</span>
-                        </button>
-                    </section>
-                </div>
-                <p class="copyright texte-couleur-gris-bleu">Tous droits réservés @jadoo.com</p>
-            </footer>
+            <?php
+                /* imporation du footer */
+                include $lien.'pages/footer.php'
+            ?>
         </main>
         <script src="./js/verif.js"></script>
 

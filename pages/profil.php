@@ -1,15 +1,20 @@
 <?php
-
     session_start();
 
+    require './../fonctions_communes.php';
+
     if (!isset($_SESSION['Identifiant'])){
-
         header("Location:./../pages/connexion.php");
-    
     } else {
-
         $identifiant = $_SESSION['user'];
+    }
 
+    $curPageName = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
+
+    if ($curPageName == "index.php") {
+        $lien = "./";
+    } else {
+        $lien = "./../";
     }
 
 ?>
@@ -19,6 +24,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="./../css/fonts.css">
+        <link rel="stylesheet" href="./../css/header_footer.css">
         <link rel="stylesheet" href="./../css/profil.css">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,51 +35,11 @@
 
     <body>
         <main>
-            <header>
-                <div class="logo">
-                    <a href="./../index.php"><img title="Jadoo, un voyage culinaire gourmet et gourmand" src="./../img/logo_jadoo_1.svg" alt="Logo jadoo" height="50px"></a><!--
-                    --><a href="./../index.php"><img title="Jadoo, un voyage culinaire gourmet et gourmand" src="./../img/logo_jadoo_2.svg" alt="Jadoo" height="35px"></a>
-                </div>
-                <?php
-                    if ($_SESSION['logged'] == 'oui') {
-    
-                        echo '<nav>
-                                    <ul>
-                                        <li class="menu-bouton"><a href="./../index.php#section-2">Les nouveautés</a></li>
-                                        <li class="menu-bouton"><a href="./../index.php#section-3">Découvrir</a></li>
-                                        <li class="menu-bouton"><a href="./../index.php#section-4">Commander</a></li>
-                                        <li class="menu-bouton"><a href="./../index.php#section-5">Contactez-nous</a></li>';
-                        if ($_SESSION['admin'] == 'oui') {
-                            echo '<li class="menu-bouton"><a href="./../pages/profil.php">Mon Compte</a></li>';
-                            echo '<li class="menu-bouton"><a href="./../pages/back_office.php">Administration</a></li>';
-                            echo '<li class="menu-bouton"><a href="./../pages/logout.php" id="deconnexion">Déconnexion</a></li>';
-                        } else {
-                            echo '<li class="menu-bouton"><a href="./../pages/profil.php">Mon Compte</a></li>';
-                            echo '<li class="menu-bouton"><a href="./../pages/logout.php" id="deconnexion">Déconnexion</a></li>';
-                        }
-                        echo                '<li class="menu-bouton burger">
-                                            <img title="Menu" src="./../img/burger_icon.svg" alt="Icone menu">
-                                        </li>
-                                    </ul>
-                                </nav>';            
 
-                    } else {
-                        echo '<nav>
-                                    <ul>
-                                        <li class="menu-bouton"><a href="./../index.php#section-2">Les nouveautés</a></li>
-                                        <li class="menu-bouton"><a href="./../index.php#section-3">Découvrir</a></li>
-                                        <li class="menu-bouton"><a href="./../index.php#section-4">Commander</a></li>
-                                        <li class="menu-bouton"><a href="./../index.php#section-5">Contactez-nous</a></li>
-                                        <li class="menu-bouton"><a href="./../pages/inscription.php">Inscription</a></li>
-                                        <li class="menu-bouton"><a href="./../pages/connexion.php">Connexion</a></li>
-                                        <li class="menu-bouton burger">
-                                            <img title="Menu" src="./../img/burger_icon.svg" alt="Icone menu">
-                                        </li>
-                                    </ul>
-                                </nav>';
-                    }
-                ?>
-            </header>
+            <?php
+                /* importation header */
+                include $lien.'pages/header.php'
+            ?>
 
             <section id="section-5">
 
@@ -135,34 +101,18 @@
                                         </div>';
                             }
                             catch(PDOException $e){
-    
-                                date_default_timezone_set('Europe/Paris');
-                                setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                                $format1 = '%A %d %B %Y %H:%M:%S';
-                                $date1 = strftime($format1);
-                                $fichier = fopen('./../log/error_log_profile.txt', 'c+b');
-                                fseek($fichier, filesize('./../log/error_log_profile.txt'));
-                                fwrite($fichier, "\n\n" .$date1. " - Erreur import infos principales utilisateur. Erreur : " .$e);
-                                fclose($fichier);
+                                write_error_log("./../log/error_log_profile.txt","Erreur import infos principales utilisateur.", $e);
 
                                 /*Fermeture de la connexion à la base de données*/
                                 $sth = null;
                                 $conn = null;
-                                
                             }
                         }
                         /*On capture les exceptions et si une exception est lancée, on écrit dans un fichier log
                         *les informations relatives à celle-ci*/
                         catch(PDOException $e){
                         //echo "Erreur : " . $e->getMessage();
-                        date_default_timezone_set('Europe/Paris');
-                        setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                        $format1 = '%A %d %B %Y %H:%M:%S';
-                        $date1 = strftime($format1);
-                        $fichier = fopen('./../log/error_log_profile.txt', 'c+b');
-                        fseek($fichier, filesize('./../log/error_log_profile.txt'));
-                        fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données. Erreur : " .$e);
-                        fclose($fichier);
+                        write_error_log("./../log/error_log_profile.txt","Impossible de se connecter à la base de données.", $e);
 
                         echo    '<article class="connexion-bdd-hs">
 
@@ -268,34 +218,19 @@
                                 
                             }
                             catch(PDOException $e){
-    
-                                date_default_timezone_set('Europe/Paris');
-                                setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                                $format1 = '%A %d %B %Y %H:%M:%S';
-                                $date1 = strftime($format1);
-                                $fichier = fopen('./../log/error_log_profile.txt', 'c+b');
-                                fseek($fichier, filesize('./../log/error_log_profile.txt'));
-                                fwrite($fichier, "\n\n" .$date1. " - Erreur import infos modifiables utilisateur partie affichage. Erreur : " .$e);
-                                fclose($fichier);
+
+                                write_error_log("./../log/error_log_profile.txt","Erreur import infos modifiables utilisateur partie affichage.", $e);
 
                                 /*Fermeture de la connexion à la base de données*/
                                 $sth = null;
                                 $conn = null;
-                                
                             }
                         }
                         /*On capture les exceptions et si une exception est lancée, on écrit dans un fichier log
                         *les informations relatives à celle-ci*/
                         catch(PDOException $e){
                         //echo "Erreur : " . $e->getMessage();
-                        date_default_timezone_set('Europe/Paris');
-                        setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                        $format1 = '%A %d %B %Y %H:%M:%S';
-                        $date1 = strftime($format1);
-                        $fichier = fopen('./../log/error_log_profile.txt', 'c+b');
-                        fseek($fichier, filesize('./../log/error_log_profile.txt'));
-                        fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données - infos modifiables utilisateur partie affichage. Erreur : " .$e);
-                        fclose($fichier);
+                        write_error_log("./../log/error_log_profile.txt","Impossible de se connecter à la base de données - infos modifiables utilisateur partie affichage.", $e);
 
                         echo    '<article class="connexion-bdd-hs">
 
@@ -383,42 +318,11 @@
 
             </section>
 
-            <footer>
-                <div class="conteneur-elements">
-                    <section id="footer-logo" class="footer-part">
-                        <div class="logo complet">
-                        <a href="./../index.php"><img title="Jadoo, un voyage culinaire gourmet et gourmand" src="./../img/logo_jadoo_1.svg" alt="Logo jadoo" height="50px"></a><!--
-                    --><a href="./../index.php"><img title="Jadoo, un voyage culinaire gourmet et gourmand" src="./../img/logo_jadoo_2.svg" alt="Jadoo" height="35px"></a>
-                        </div>
-                        <p class="texte-couleur-gris-bleu">Un voyage gastronomique entre<br>le Japon et la France</p>
-                    </section><!--
-                    --><section id="footer-plan" class="footer-part">
-                        <div class="plan-restaurant">
-                            <p class="texte-poppins-bold plan-title">Restaurant</p>
-                            <p class="texte-couleur-gris-bleu"><a href="./../index.php#section-2">Nouveautés</a></p>
-                            <p class="texte-couleur-gris-bleu"><a href="./../index.php#section-3">Découvrir</a></p>
-                            <p class="texte-couleur-gris-bleu"><a href="./../index.php#section-4">Commander</a></p>
-                        </div>
-                        <div class="plan-contact">
-                            <p class="texte-poppins-bold plan-title">Contact</p>
-                            <p class="texte-couleur-gris-bleu"><a href="./../index.php#section-5">Prendre RDV</a></p>
-                        </div>
-                    </section><!--
-                    --><section id="footer-uberEats" class="footer-part">
-                        <img class="logo-ubereat" title="UberEats" src="./../img/logo_uberEats_2.svg" alt="Logo UberEats">
-                        <p class="texte-couleur-gris-bleu">Téléchargez UberEats</p>
-                        <button class="app-download-button bouton">
-                            <img src="./../img/logo_google_play.svg" alt="Logo Google Play"><!--
-                            --><span>GOOGLE PLAY</span>
-                        </button>
-                        <button class="app-download-button bouton">
-                            <img src="./../img/logo_apple.svg" alt="Logo Apple"><!--
-                            --><span>APPLE STORE</span>
-                        </button>
-                    </section>
-                </div>
-                <p class="copyright texte-couleur-gris-bleu">Tous droits réservés @jadoo.com</p>
-            </footer>
+            <?php
+                /* imporation du footer */
+                include $lien.'pages/footer.php'
+            ?>
+
         </main>
         <script src="./../js/profil.js"></script>
     </body>

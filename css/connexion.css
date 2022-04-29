@@ -14,211 +14,10 @@ button {
     font-family: "volkhov-bold";
 }
 
-/* Remplacement des comportements d'origine */
-header nav ul .menu-bouton a,
-#footer-plan a {
-    text-decoration: none;
-    color: inherit;
-}
-
-header nav ul .menu-bouton a:hover,
-#footer-plan a:hover{
-    text-decoration: underline;
-}
-
-
-/* Logo jadoo */
-.logo {
-    height: 100%;
-    display: inline-block;
-    vertical-align: middle;
-    white-space: nowrap;
-}
-
-.logo img {
-    max-height: 100%;
-}
-
-.logo img:first-child {
-    margin-right: 20px;
-}
-
-.logo:hover img:first-child {
-    animation: logo-animation 0.5s ease-in;
-    margin-right: 20px;
-}
-
-@keyframes logo-animation {
-    20% {
-        transform: rotate(15deg);
-    }
-
-    40% {
-        transform: rotate(-10deg);
-    }
-
-    60% {
-        transform: rotate(5deg);
-    }
-
-    80% {
-        transform: rotate(-5deg);
-    }
-
-    to {
-        transform: rotate(0deg);
-    }
-}
-
-
-/* CSS en-tête */
-header {
-    display: flex;
-    background-color: #fff;
-    width: 100%;
-    height: 70px;
-    position: sticky;
-    z-index: 5;
-    top: 0;
-    padding: 20px 0;
-    transition: all 0.2s ease-in-out;
-}
-
-header nav {
-    height: 100%;
-    margin-right: 8%;
-    transition: all 0.2s ease-in-out;
-}
-
-header nav ul {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    height: 100%;
-    list-style-type: none;
-}
-
-header .logo {
-    margin-left: 8%;
-    margin-right: auto;
-    transition: all 0.2s ease-in-out;
-}
-
-header nav ul li a {
-    color: #212832;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 17px;
-}
-
-header nav ul li:not(:last-child) {
-    margin-right: 30px;
-}
-
-header .burger {
-    display: none;
-}
-
-
-/* CSS pied de page */
-
-footer {
-    background-color: #f3f3f3;
-    padding: 70px 8% 20px;
-}
-
-footer > p {
-    font-size: 14px;
-}
-
-footer section {
-    padding: 0;
-}
-
-footer .copyright {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 500;
-    text-align: center;
-}
-
-footer .footer-part {
-    display: inline-block;
-    vertical-align: top;
-    margin-bottom: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 20px 0 20px;
-}
-
-footer p {
-    font-size: 18px;
-    line-height: 147.5%;
-}
-
-#footer-logo .logo {
-    display: block;
-    height: auto;
-}
-
-#footer-logo .logo img {
-    height: 50px;
-}
-
-#footer-plan div {
-    display: inline-block;
-    vertical-align: top;
-}
-
-#footer-plan p {
-    margin: 0;
-}
-
-#footer-plan p:not(:last-child) {
-    margin: 0 0 10px;
-}
-
-#footer-plan .plan-title:not(:last-child) {
-    margin: 0 0 20px;
-}
-
-#footer-plan .plan-title {
-    font-size: 21px;
-}
-
-#footer-plan div:not(:last-child) {
-    margin: 0 50px 0 0;
-}
-
-#footer-uberEats .logo-ubereat {
-    height: 30px;
-}
-
-#footer-uberEats p {
-    margin: 10px 0 30px;
-}
-
-#footer-uberEats .app-download-button {
-    background-color: #000;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 20px;
-    font-size: 10px;
-}
-
-#footer-uberEats .app-download-button img {
-    margin: 0 10px 0 0;
-}
-
-#footer-uberEats .app-download-button * {
-    display: inline-block;
-    vertical-align: middle;
-}
-
 
 /* Utilisé pour l'effet parallax */
 
 main {
-    height: 100vh;
     perspective: 2px;
     overflow-x: hidden;
 }
@@ -332,23 +131,6 @@ section::after {
         font-size: 14px;
     }
 
-    header nav ul li {
-        display: none;
-    }
-
-    header .logo {
-        margin-left: 5%;
-    }
-
-    header nav {
-        margin-right: 5%;
-    }
-
-    header .burger {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
     .conteneur-form-login{
 
         margin-left: auto;
@@ -375,7 +157,6 @@ section::after {
     
     }
 
-    footer,
     section {
         padding-left: 5%;
         padding-right: 5%;
@@ -390,15 +171,6 @@ section::after {
 
     }
 
-    footer .footer-part,
-    footer .footer-part * {
-        text-align: center;
-    }
-
-    footer #footer-plan.footer-part * {
-        text-align: left;
-    }
-
 }
 
 
@@ -407,7 +179,6 @@ section::after {
 
 @media (max-width: 656px) {
 
-    footer,
     section{
         padding-top: 8%;
         padding-bottom: 8%;
@@ -417,35 +188,6 @@ section::after {
         width: 100%;
         text-align: center;
         max-width: initial;
-    }
-
-    footer .footer-part{
-
-        margin-bottom: 20px;
-
-    }
-
-}
-
-
-@media (max-width: 360px) {
-
-    #footer-plan{
-
-       flex-direction: column;
-
-    }
-
-    #footer-plan p{
-
-        font-size: 14px;
-
-    }
-
-    #footer-plan div:not(:last-child){
-
-        margin-right: 20px;
-
     }
 
 }

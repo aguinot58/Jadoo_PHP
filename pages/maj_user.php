@@ -1,13 +1,7 @@
 <?php
-
     session_start();
 
-    function valid_donnees($donnees){
-        $donnees = trim($donnees);
-        $donnees = stripslashes($donnees);
-        $donnees = htmlspecialchars($donnees);
-        return $donnees;
-    }
+    require './../fonctions_communes.php';
 
     $identifiant = $_SESSION['user'];
     $mdp = valid_donnees($_POST["mdp"]);
@@ -92,42 +86,22 @@
 
         }
         catch(PDOException $e){
-
         // rollback de la transaction
         $conn->rollBack();
 
         //echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
-        date_default_timezone_set('Europe/Paris');
-        setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-        $format1 = '%A %d %B %Y %H:%M:%S';
-        $date1 = strftime($format1);
-        $fichier = fopen('./../log/error_log_maj_user.txt', 'c+b');
-        fseek($fichier, filesize('./../log/error_log_maj_user.txt'));
-        fwrite($fichier, "\n\n" .$date1. " - Impossible de mettre à jour les données. Erreur : " .$e);
-        fclose($fichier);
+        write_error_log("./../log/error_log_maj_user.txt","Impossible de mettre à jour les données.", $e);
         echo 'Une erreur est survenue, merci de réessayer ultérieurement.';
 
         /*Fermeture de la connexion à la base de données*/
         $sth = null;
         $conn = null;
-
         }
-
     }
     catch(PDOException $e){
-
         // erreur de connexion à la bdd
         //echo "Erreur : " . $e->getMessage();
-        date_default_timezone_set('Europe/Paris');
-        setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-        $format1 = '%A %d %B %Y %H:%M:%S';
-        $date1 = strftime($format1);
-        $fichier = fopen('./../log/error_log_maj_user.txt', 'c+b');
-        fseek($fichier, filesize('./../log/error_log_maj_user.txt'));
-        fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données. Erreur : " .$e);
-        fclose($fichier);
+        write_error_log("./../log/error_log_maj_user.txt","Impossible de se connecter à la base de données.", $e);
         echo 'Une erreur est survenue, merci de réessayer ultérieurement.';
-
     }
-
 ?>

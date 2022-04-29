@@ -1,17 +1,12 @@
 <?php
     session_start();
 
+    require './../fonctions_communes.php';
+
     $nom = valid_donnees($_POST["nom"]);
     $prenom = valid_donnees($_POST["prenom"]);
     $email = valid_donnees($_POST["email"]);
     $message = valid_donnees($_POST["message"]);
-
-    function valid_donnees($donnees){
-        $donnees = trim($donnees);
-        $donnees = stripslashes($donnees);
-        $donnees = htmlspecialchars($donnees);
-        return $donnees;
-    }
 
     if (!empty($nom) && !empty($prenom) && !empty($email) && !empty($message) && strlen($nom) <= 40 && 
         strlen($prenom) <= 40 && strlen($email) <= 255 && preg_match("/^[A-Za-z '-]+$/", $nom) && 
@@ -25,8 +20,7 @@
             $username = $configs['username'];
             $password = $configs['password'];
 
-            $tb_dte = explode("/", date("Y/m/d"));
-            $dte_message = $tb_dte[2].'/'.$tb_dte[1].'/'.$tb_dte[0];
+            $dte_message = date("Y/m/d");
 
             //On établit la connexion
             $conn = new PDO("mysql:host=$servername;dbname=jadoo;charset=UTF8", $username, $password);
@@ -37,8 +31,8 @@
                 
                 //On insère les données reçues
                 $sth = $conn->prepare("
-                        INSERT INTO messages(Nom, Prenom, Email, Message, Dte_message)
-                        VALUES(:nom, :prenom, :email, :message :date_message)");
+                        INSERT INTO messages(Nom, Prenom, Email, Message, Date_msg)
+                        VALUES(:nom, :prenom, :email, :message, :date_message)");
                 $sth->bindParam(':nom', $nom);    
                 $sth->bindParam(':prenom', $prenom);
                 $sth->bindParam(':email', $email);
@@ -57,17 +51,8 @@
             /*On capture les exceptions si une exception est lancée et on affiche
             *les informations relatives à celle-ci*/
             catch(PDOException $e){
-                //echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
-                date_default_timezone_set('Europe/Paris');
-                setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                $format1 = '%A %d %B %Y %H:%M:%S';
-                $date1 = strftime($format1);
-                $fichier = fopen('./../log/error_log_formulaire.txt', 'c+b');
-                fseek($fichier, filesize('./../log/error_log_formulaire.txt'));
-                fwrite($fichier, "\n\n" .$date1. " - Impossible d'injecter les données. Erreur : " .$e);
-                fclose($fichier);
+                write_error_log("./../error_log/error_log_formulaire.txt","Impossible d'injecter les données.", $e);
                 echo 'Une erreur est survenue, merci de réessayer ultérieurement.';
-
                 /*Fermeture de la connexion à la base de données*/
                 $sth = null;
                 $conn = null;
@@ -77,14 +62,7 @@
         catch(PDOException $e){
             // erreur de connexion à la bdd
             //echo "Erreur : " . $e->getMessage();
-            date_default_timezone_set('Europe/Paris');
-            setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-            $format1 = '%A %d %B %Y %H:%M:%S';
-            $date1 = strftime($format1);
-            $fichier = fopen('./../log/error_log_formulaire.txt', 'c+b');
-            fseek($fichier, filesize('./../log/error_log_formulaire.txt'));
-            fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données. Erreur : " .$e);
-            fclose($fichier);
+            write_error_log("./../error_log/error_log_formulaire.txt","Impossible de se connecter à la base de données.", $e);
             echo 'Une erreur est survenue, merci de réessayer ultérieurement.';
         }
 
