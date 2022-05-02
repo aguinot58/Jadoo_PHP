@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    require './../fonctions_communes.php';
+    require './../pages/fonctions_communes.php';
 
     $nom = valid_donnees($_POST["nom"]);
     $prenom = valid_donnees($_POST["prenom"]);

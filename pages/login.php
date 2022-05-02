@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    require './../fonctions_communes.php';
+    require './../pages/fonctions_communes.php';
 
     $identifiant = valid_donnees($_POST["login"]);
     $mdp = valid_donnees($_POST["password"]);

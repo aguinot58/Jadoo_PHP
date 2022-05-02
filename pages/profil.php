@@ -1,7 +1,8 @@
 <?php
     session_start();
 
-    require './../fonctions_communes.php';
+    require './../pages/fonctions_communes.php';
+    
 
     if (!isset($_SESSION['Identifiant'])){
         header("Location:./../pages/connexion.php");
