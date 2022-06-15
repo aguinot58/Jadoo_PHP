@@ -1,0 +1,6 @@
+
+
+mercredi 15 juin 2022 16:07:36 - Impossible de se connecter à la base de données. - Erreur : PDOException: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO) in C:\laragon\www\Jadoo_PHP\pages\login.php:37
+Stack trace:
+#0 C:\laragon\www\Jadoo_PHP\pages\login.php(37): PDO->__construct('mysql:host=;dbn...', NULL, NULL)
+#1 {main}

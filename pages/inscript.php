@@ -27,24 +27,13 @@
         preg_match("/[0-9]{5}/", $codeP) && 
         preg_match("/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/", $dteNaissance)) {
 
-        try{
-
-            /* Connexion à une base de données en PDO */
-            $configs = include('config.php');
-            $servername = $configs['servername'];
-            $username = $configs['username'];
-            $password = $configs['password'];
-            // On établit la connexion
-            $conn = new PDO("mysql:host=$servername;dbname=jadoo;charset=UTF8", $username, $password);
-            // On définit le mode d'erreur de PDO sur Exception
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        require ('./../pages/conn_bdd.php'); 
 
             try{
 
                 $tb_dte = explode("/", $dteNaissance);
                 $dteNaissance = $tb_dte[2].'/'.$tb_dte[1].'/'.$tb_dte[0];
 
-                $pepper = $configs['pepper'];
                 $pwd_peppered = hash_hmac("sha256", $mdp, $pepper);
                 $pwd_hashed = password_hash($pwd_peppered, PASSWORD_ARGON2ID);
 
@@ -100,9 +89,8 @@
                 //On renvoie l'utilisateur vers la page de remerciement
                 header("Location:inscript-merci.php");
 
-                }
-                catch(PDOException $e){
-
+            }
+            catch(PDOException $e){
                 // rollback de la transaction
                 $conn->rollBack();
 
@@ -113,14 +101,8 @@
                 /*Fermeture de la connexion à la base de données*/
                 $sth = null;
                 $conn = null;
-                }
             }
-            catch(PDOException $e){
-            // erreur de connexion à la bdd
-            //echo "Erreur : " . $e->getMessage();
-            write_error_log("./../log/error_log_inscription.txt","Impossible de se connecter à la base de données.", $e);
-            echo 'Une erreur est survenue, merci de réessayer ultérieurement.';
-            }
+
     } else {
         //echo 'pb de données';
         echo 'Une erreur est survenue, merci de réessayer ultérieurement.';

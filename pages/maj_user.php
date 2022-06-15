@@ -14,17 +14,7 @@
     $codeP = valid_donnees($_POST["code_postal"]);
     $ville = valid_donnees($_POST["ville"]);
 
-    try{
-
-        /* Connexion à une base de données en PDO */
-        $configs = include('config.php');
-        $servername = $configs['servername'];
-        $username = $configs['username'];
-        $password = $configs['password'];
-        // On établit la connexion
-        $conn = new PDO("mysql:host=$servername;dbname=jadoo;charset=UTF8", $username, $password);
-        // On définit le mode d'erreur de PDO sur Exception
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    require ('./../pages/conn_bdd.php'); 
 
         try{
             $conn->beginTransaction();
@@ -97,11 +87,5 @@
         $sth = null;
         $conn = null;
         }
-    }
-    catch(PDOException $e){
-        // erreur de connexion à la bdd
-        //echo "Erreur : " . $e->getMessage();
-        write_error_log("./../log/error_log_maj_user.txt","Impossible de se connecter à la base de données.", $e);
-        echo 'Une erreur est survenue, merci de réessayer ultérieurement.';
-    }
+
 ?>

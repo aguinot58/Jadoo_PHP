@@ -13,6 +13,8 @@
         $lien = "./../";
     }
 
+    require ('./pages/conn_bdd.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -68,17 +70,6 @@
                     <div class="conteneur-carte conteneur-carte-ligne">
                         <?php
 
-                            /* Connexion à une base de données en PDO */
-                            $configs = include('./pages/config.php');
-                            $servername = $configs['servername'];
-                            $username = $configs['username'];
-                            $password = $configs['password'];
-                            //On établit la connexion
-                            try{
-                                $conn = new PDO("mysql:host=$servername;dbname=jadoo;charset=UTF8", $username, $password);
-                                //On définit le mode d'erreur de PDO sur Exception
-                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
                                 try{
 
                                     $tb_tirage_pc = array();
@@ -131,26 +122,6 @@
 
                                     };
 
-
-                                    // Version de base sans tirage aléatoire affichant les 3 derniers plats chauds
-                                    /*
-                                    //Sélectionne les valeurs dans les colonnes pour chaque entrée de la table
-                                    $sth = $conn->prepare("SELECT Nom, Description, Image FROM plats INNER JOIN categories ON plats.Id_Categorie = categories.Id_Categorie where categories.Categorie = 'plats_chauds' order by Id DESC LIMIT 3");
-                                    $sth->execute();
-                                    //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
-                                    $plats = $sth->fetchAll(PDO::FETCH_ASSOC);
-        
-                                    foreach ($plats as $plat) {
-        
-                                        echo    '<article class="carte">
-                                                    <figure>
-                                                        <img title="' .$plat['Nom']. '" src="./img/' .$plat['Image']. '" alt="Image ' .$plat['Nom']. '">
-                                                        <figcaption>' .$plat['Description']. '</figcaption>
-                                                    </figure>
-                                                </article>';
-                                                
-                                    };*/
-
                                     //Fermeture de la connexion à la base de données
                                     $sth = null;
                                     $conn = null;
@@ -172,48 +143,15 @@
                                     $conn = null;
                                     
                                 }
-
-                            }
-                            /*On capture les exceptions et si une exception est lancée, on écrit dans un fichier log
-                            *les informations relatives à celle-ci*/
-                            catch(PDOException $e){
-                            //echo "Erreur : " . $e->getMessage();
-                            date_default_timezone_set('Europe/Paris');
-                            setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                            $format1 = '%A %d %B %Y %H:%M:%S';
-                            $date1 = strftime($format1);
-                            $fichier = fopen('./../log/error_log_index.txt', 'c+b');
-                            fseek($fichier, filesize('./../log/error_log_index.txt'));
-                            fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données. Erreur : " .$e);
-                            fclose($fichier);
-
-                            echo    '<article class="connexion-bdd-hs">
-
-                                        <p>Une erreur est survenue lors de la connexion à la base de données.<br><br>
-                                            Merci de rafraichir la page, et si le problème persiste, de réessayer ultérieurement.   </p>
-
-                                    </article>';
-
-                            }
-
                         ?>
                     </div>
                 </div>
                 <div id="conteneur-maki" class="conteneur-elements">
                     <div class="conteneur-carte conteneur-carte-ligne">
 
-                        <?php
+                        <?php 
 
-                            /* Connexion à une base de données en PDO */
-                            $configs = include('./pages/config.php');
-                            $servername = $configs['servername'];
-                            $username = $configs['username'];
-                            $password = $configs['password'];
-                            //On établit la connexion
-                            try{
-                                $conn = new PDO("mysql:host=$servername;dbname=jadoo;charset=UTF8", $username, $password);
-                                //On définit le mode d'erreur de PDO sur Exception
-                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+                            require ('./pages/conn_bdd.php');
                                 
                                 try{
 
@@ -270,28 +208,6 @@
 
                                     };
 
-                                    // Version de base sans tirage aléatoire pour sélectionner les 4 derniers makis.
-                                    /*
-                                    //Sélectionne les valeurs dans les colonnes pour chaque entrée de la table
-                                    $sth = $conn->prepare("SELECT Nom, Description, Image FROM plats INNER JOIN categories ON plats.Id_Categorie = categories.Id_Categorie where categories.Categorie = 'makis' order by Id DESC LIMIT 4");
-                                    $sth->execute();
-                                    //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
-                                    $plats = $sth->fetchAll(PDO::FETCH_ASSOC);
-
-                                    foreach ($plats as $plat) {
-
-                                        echo    '<article class="carte">
-                                                    <figure>
-                                                        <img title="' .$plat['Nom']. '" src="./img/' .$plat['Image']. '" alt="Image '.$plat['Nom']. '">
-                                                        <figcaption>
-                                                            <p class="texte-couleur-bleu texte-poppins-bold">' .$plat['Nom']. '</p>
-                                                            <p>' .$plat['Description']. '</p>
-                                                        </figcaption>
-                                                    </figure>
-                                                </article>';
-
-                                    };*/
-
                                     //Fermeture de la connexion à la base de données
                                     $sth = null;
                                     $conn = null;
@@ -309,30 +225,6 @@
                                     fclose($fichier);
                                     
                                 }
-
-                            }
-                            /*On capture les exceptions et si une exception est lancée, on écrit dans un fichier log
-                            *les informations relatives à celle-ci*/
-                            catch(PDOException $e){
-                            //echo "Erreur : " . $e->getMessage();
-                            date_default_timezone_set('Europe/Paris');
-                            setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                            $format1 = '%A %d %B %Y %H:%M:%S';
-                            $date1 = strftime($format1);
-                            $fichier = fopen('./../log/error_log_index.txt', 'c+b');
-                            fseek($fichier, filesize('./../log/error_log_index.txt'));
-                            fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données. Erreur : " .$e);
-                            fclose($fichier);
-
-                            echo    '<article class="connexion-bdd-hs">
-
-                                        <p>Une erreur est survenue lors de la connexion à la base de données.<br><br>
-                                            Merci de rafraichir la page, et si le problème persiste, de réessayer ultérieurement.   </p>
-
-                                    </article>';
-
-                            }
-
                         ?>
                     </div>
                 </div>

@@ -50,16 +50,7 @@
 
                     <?php
 
-                        /* Connexion à une base de données en PDO */
-                        $configs = include('./../pages/config.php');
-                        $servername = $configs['servername'];
-                        $username = $configs['username'];
-                        $password = $configs['password'];
-                        //On établit la connexion
-                        try{
-                            $conn = new PDO("mysql:host=$servername;dbname=jadoo;charset=UTF8", $username, $password);
-                            //On définit le mode d'erreur de PDO sur Exception
-                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        require ('./../pages/conn_bdd.php');
 
                             try{
 
@@ -108,21 +99,6 @@
                                 $sth = null;
                                 $conn = null;
                             }
-                        }
-                        /*On capture les exceptions et si une exception est lancée, on écrit dans un fichier log
-                        *les informations relatives à celle-ci*/
-                        catch(PDOException $e){
-                        //echo "Erreur : " . $e->getMessage();
-                        write_error_log("./../log/error_log_profile.txt","Impossible de se connecter à la base de données.", $e);
-
-                        echo    '<article class="connexion-bdd-hs">
-
-                                    <p>Une erreur est survenue lors de la connexion à la base de données.<br><br>
-                                        Merci de rafraichir la page, et si le problème persiste, de réessayer ultérieurement.   </p>
-
-                                </article>';
-
-                        }
                     ?>
 
                 </article>
@@ -131,11 +107,7 @@
 
                     <?php
 
-                        //On établit la connexion
-                        try{
-                            $conn = new PDO("mysql:host=$servername;dbname=jadoo;charset=UTF8", $username, $password);
-                            //On définit le mode d'erreur de PDO sur Exception
-                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        require ('./../pages/conn_bdd.php');    
 
                             try{
 
@@ -226,21 +198,6 @@
                                 $sth = null;
                                 $conn = null;
                             }
-                        }
-                        /*On capture les exceptions et si une exception est lancée, on écrit dans un fichier log
-                        *les informations relatives à celle-ci*/
-                        catch(PDOException $e){
-                        //echo "Erreur : " . $e->getMessage();
-                        write_error_log("./../log/error_log_profile.txt","Impossible de se connecter à la base de données - infos modifiables utilisateur partie affichage.", $e);
-
-                        echo    '<article class="connexion-bdd-hs">
-
-                                    <p>Une erreur est survenue lors de la connexion à la base de données.<br><br>
-                                        Merci de rafraichir la page, et si le problème persiste, de réessayer ultérieurement.   </p>
-
-                                </article>';
-
-                        }
                     ?>
 
                 </article>
