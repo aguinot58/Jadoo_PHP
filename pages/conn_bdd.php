@@ -5,13 +5,13 @@
         
     if ($curPageName == "index.php") {
         $lien_local = "../../";
-        $lien_prod = "../";
+        $lien_prod = "../../../";
     } else {
         $lien_local = "../../../";
-        $lien_prod = "../../";
+        $lien_prod = "../../../../";
     }
 
-    if (file_exists($lien_local.'etc/ini/folio.ini')){
+    if (file_exists($lien_local.'etc/ini/jadoo_php.ini')){
         $base = "locale";
         $inifile = parse_ini_file($lien_local.'etc/ini/jadoo_php.ini',true);
         $servername = $inifile['Base_locale']['servername'];
