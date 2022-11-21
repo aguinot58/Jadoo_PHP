@@ -75,7 +75,7 @@
                                     $tb_tirage_pc = array();
 
                                     // Selection de tous les Id de plats chauds
-                                    $sth = $conn->prepare("SELECT Id FROM plats where Id_Categorie = '1'");
+                                    $sth = $conn->prepare("SELECT Id FROM plats where Id_Categorie = '1' and Visible = 1");
                                     $sth->execute();
                                     $tb_Id_pc = $sth->fetchAll(PDO::FETCH_ASSOC);
 
@@ -158,7 +158,7 @@
                                     $tb_tirage = array();
 
                                     // Selection de tous les Id de makis
-                                    $sth = $conn->prepare("SELECT Id FROM plats where Id_Categorie = '2'");
+                                    $sth = $conn->prepare("SELECT Id FROM plats where Id_Categorie = '2' AND Visible = 1");
                                     $sth->execute();
                                     $tb_Id = $sth->fetchAll(PDO::FETCH_ASSOC);
 
